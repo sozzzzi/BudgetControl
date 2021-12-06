@@ -1,5 +1,7 @@
 #include <QDialog>
 #include <QMessageBox>
+#include <QFile>
+#include <QTimer>
 
 #include "mainwindow.hpp"
 #include "employeemainwindow.hpp"
@@ -54,6 +56,81 @@ MainWindow::MainWindow(QWidget *parent)
     m_users.push_back(user4);
 
     authorization();
+
+    auto updateTimer = new QTimer;
+    connect(updateTimer, SIGNAL(timeout()), this, SLOT(exit()));
+    updateTimer->start();
+}
+
+void MainWindow::save_users()
+{
+    QFile outf("users.bin");
+    outf.open(QIODevice::WriteOnly);
+    QDataStream ost(&outf);
+    for (size_t i = 0; i < m_users.size(); i++)
+    {
+        if (m_users[i].getDepartment() != "Администрация")
+            ost << m_users[i];
+    }
+    outf.close();
+}
+
+void MainWindow::load_users()
+{
+    QFile inf("users.bin");
+    inf.open(QIODevice::ReadOnly);
+    QDataStream ist(&inf);
+    m_users.clear();
+    while (!ist.atEnd())
+    {
+        User u;
+        ist >> u;
+        m_users.push_back(u);
+    }
+}
+
+void MainWindow::load_expenses()
+{
+    QFile inf("expenses.bin");
+    inf.open(QIODevice::ReadOnly);
+    QDataStream ist(&inf);
+    m_expenses.clear();
+    while (!ist.atEnd())
+    {
+        Expenses e;
+        ist >> e;
+        m_expenses.push_back(e);
+    }
+}
+
+void MainWindow::getDepartments()
+{
+    for (size_t i = 0; i < m_users.size(); i++)
+    {
+        for (size_t j = 0; j < m_departments.size(); j++)
+        {
+            if (m_users[i].getDepartment() == m_departments[j].getName())
+            {
+                m_departments[j].addUser(m_users[i]);
+                break;
+            }
+        }
+        Department d;
+        d.setName(m_users[i].getDepartment());
+        d.addUser(m_users[i]);
+        m_departments.push_back(d);
+    }
+
+    for (size_t i = 0; i < m_expenses.size(); i++)
+    {
+        for (size_t j = 0; j < m_departments.size(); j++)
+        {
+            if (m_expenses[i].getDepartment() == m_departments[j].getName())
+            {
+                m_departments[j].addExpense(m_expenses[i]);
+            }
+        }
+    }
 }
 
 void MainWindow::authorization()
@@ -83,6 +160,7 @@ void MainWindow::authorization()
     {
         QMessageBox::information(0, "BudgetControl", QString("Вы успешно авторизированы, %1 %2 %3.")
                                  .arg(m_auth_user.getSurname()).arg(m_auth_user.getName()).arg(m_auth_user.getPatronymic()));
+        getDepartments();
         if (m_auth_user.getDepartment() == "Администрация" || m_auth_user.getDepartment() == "Бухгалтерия")
         {
             //AccountantMainWindow *accMW = new AccountantMainWindow;
@@ -92,12 +170,18 @@ void MainWindow::authorization()
         }
         else
         {
-            //EmployeeMainWindow *empMW = new EmployeeMainWindow;
-            //empMW->setUsers(m_users);
-            //empMW->setCalls(m_calls);
-            //empMW->setIndex(index);
-            //empMW->show();
-            //this->close();
+            EmployeeMainWindow *empMW = new EmployeeMainWindow;
+            size_t index = 0;
+            for (index = 0; index < m_departments.size(); index++)
+            {
+                if (m_departments[index].getName() == m_auth_user.getDepartment())
+                    break;
+
+            }
+            empMW->setDepartment(m_departments[index]);
+            empMW->setUser(m_auth_user);
+            empMW->show();
+            this->close();
         }
     }
     else if (try_auth)
@@ -105,6 +189,11 @@ void MainWindow::authorization()
         QMessageBox::information(0, "BudgetControl", "Неверно введены фамилия и/или пароль.\nПопробуйте еще раз.");
         authorization();
     }
+}
+
+void MainWindow::exit()
+{
+    MainWindow::close();
 }
 
 MainWindow::~MainWindow()

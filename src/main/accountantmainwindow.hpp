@@ -1,13 +1,13 @@
 #ifndef ACCOUNTANTMAINWINDOW_HPP
 #define ACCOUNTANTMAINWINDOW_HPP
 
-#include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
 class AccountantMainWindow;
 }
 
-class AccountantMainWindow : public QDialog
+class AccountantMainWindow : public QMainWindow
 {
     Q_OBJECT
 

@@ -2,7 +2,7 @@
 #include "ui_accountantmainwindow.h"
 
 AccountantMainWindow::AccountantMainWindow(QWidget *parent) :
-    QDialog(parent),
+    QMainWindow(parent),
     ui(new Ui::AccountantMainWindow)
 {
     ui->setupUi(this);
