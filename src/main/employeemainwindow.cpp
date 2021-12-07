@@ -16,6 +16,7 @@ EmployeeMainWindow::~EmployeeMainWindow()
 void EmployeeMainWindow::setDepartment(Department m_department_)
 {
     m_department = m_department_;
+    ui->departmentLabel->setText(m_department.getName());
 }
 
 void EmployeeMainWindow::setUser(User m_user_)
@@ -23,5 +24,4 @@ void EmployeeMainWindow::setUser(User m_user_)
     m_user = m_user_;
 
     ui->fioLabel->setText(m_user.getSurname() + " " + m_user.getName() + " " + m_user.getPatronymic());
-    ui->departmentLabel->setText(m_user.getDepartment());
 }

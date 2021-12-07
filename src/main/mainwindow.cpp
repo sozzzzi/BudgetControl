@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    load_users();
+    load_expenses();
+
     User admin;
     admin.setSurname("Халаманов");
     admin.setName("Алексей");
@@ -23,56 +26,42 @@ MainWindow::MainWindow(QWidget *parent)
     admin.setPassword("халаманов_папочка");
     m_users.push_back(admin);
 
-    User user1;
-    user1.setSurname("Абобов");
-    user1.setName("Абоба");
-    user1.setPatronymic("Абобович");
-    user1.setDepartment("Бухгалтерия");
-    user1.setPassword("я лучший тупа");
-    m_users.push_back(user1);
+//    User user1;
+//    user1.setSurname("Абобов");
+//    user1.setName("Абоба");
+//    user1.setPatronymic("Абобович");
+//    user1.setDepartment("Бухгалтерия");
+//    user1.setPassword("я лучший тупа");
+//    m_users.push_back(user1);
 
-    User user2;
-    user2.setSurname("Биба");
-    user2.setName("Бибович");
-    user2.setPatronymic("Бибов");
-    user2.setDepartment("Преподаватели");
-    user2.setPassword("я бибка ы");
-    m_users.push_back(user2);
+//    User user2;
+//    user2.setSurname("Биба");
+//    user2.setName("Бибович");
+//    user2.setPatronymic("Бибов");
+//    user2.setDepartment("Преподаватели");
+//    user2.setPassword("я бибка ы");
+//    m_users.push_back(user2);
 
-    User user3;
-    user3.setSurname("Лупов");
-    user3.setName("Лупа");
-    user3.setPatronymic("Лупович");
-    user3.setDepartment("Охрана");
-    user3.setPassword("за мной пупа");
-    m_users.push_back(user3);
+//    User user3;
+//    user3.setSurname("Лупов");
+//    user3.setName("Лупа");
+//    user3.setPatronymic("Лупович");
+//    user3.setDepartment("Охрана");
+//    user3.setPassword("за мной пупа");
+//    m_users.push_back(user3);
 
-    User user4;
-    user4.setSurname("Пупов");
-    user4.setName("Пупа");
-    user4.setPatronymic("Пупович");
-    user4.setDepartment("Охрана");
-    user4.setPassword("я иду после лупы");
-    m_users.push_back(user4);
-
+//    User user4;
+//    user4.setSurname("Пупов");
+//    user4.setName("Пупа");
+//    user4.setPatronymic("Пупович");
+//    user4.setDepartment("Охрана");
+//    user4.setPassword("я иду после лупы");
+//    m_users.push_back(user4);
     authorization();
 
     auto updateTimer = new QTimer;
     connect(updateTimer, SIGNAL(timeout()), this, SLOT(exit()));
     updateTimer->start();
-}
-
-void MainWindow::save_users()
-{
-    QFile outf("users.bin");
-    outf.open(QIODevice::WriteOnly);
-    QDataStream ost(&outf);
-    for (size_t i = 0; i < m_users.size(); i++)
-    {
-        if (m_users[i].getDepartment() != "Администрация")
-            ost << m_users[i];
-    }
-    outf.close();
 }
 
 void MainWindow::load_users()
@@ -107,18 +96,22 @@ void MainWindow::getDepartments()
 {
     for (size_t i = 0; i < m_users.size(); i++)
     {
+        bool find = false;
         for (size_t j = 0; j < m_departments.size(); j++)
         {
             if (m_users[i].getDepartment() == m_departments[j].getName())
             {
                 m_departments[j].addUser(m_users[i]);
-                break;
+                find = true;
             }
         }
-        Department d;
-        d.setName(m_users[i].getDepartment());
-        d.addUser(m_users[i]);
-        m_departments.push_back(d);
+        if (!find)
+        {
+            Department d;
+            d.setName(m_users[i].getDepartment());
+            d.addUser(m_users[i]);
+            m_departments.push_back(d);
+        }
     }
 
     for (size_t i = 0; i < m_expenses.size(); i++)
@@ -128,6 +121,7 @@ void MainWindow::getDepartments()
             if (m_expenses[i].getDepartment() == m_departments[j].getName())
             {
                 m_departments[j].addExpense(m_expenses[i]);
+                break;
             }
         }
     }
@@ -163,10 +157,11 @@ void MainWindow::authorization()
         getDepartments();
         if (m_auth_user.getDepartment() == "Администрация" || m_auth_user.getDepartment() == "Бухгалтерия")
         {
-            //AccountantMainWindow *accMW = new AccountantMainWindow;
-            //accMW->setUsers(m_users);
-            //accMW->show();
-            //this->close();
+            AccountantMainWindow *accMW = new AccountantMainWindow;
+            accMW->setDepartment(m_departments);
+            accMW->setUser(m_auth_user);
+            accMW->show();
+            this->close();
         }
         else
         {

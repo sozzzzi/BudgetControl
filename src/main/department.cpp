@@ -25,3 +25,18 @@ void Department::addExpense(Expenses m_expenses_)
     m_expenses.push_back(m_expenses_);
 }
 
+std::vector<Expenses>* Department::getExpenses()
+{
+    return &m_expenses;
+}
+
+std::vector<Expenses> Department::getExpense()
+{
+    return m_expenses;
+}
+
+std::vector<User> Department::getUsers()
+{
+    return m_users;
+}
+
