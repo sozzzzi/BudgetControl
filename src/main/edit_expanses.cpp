@@ -98,7 +98,7 @@ void Edit_Expanses::editExpense()
     ed_ex.setExpense(&m_expenses->at(i));
     if (ed_ex.exec() != Edit_Expense::Accepted)
         return;
-
+    m_expenses->at(i).setDepartment(m_departments->at(ui->comboBox->currentIndex() - 1).getName());
     updateTable(ui->comboBox->currentIndex());
 }
 

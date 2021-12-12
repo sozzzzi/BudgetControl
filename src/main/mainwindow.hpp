@@ -3,10 +3,7 @@
 
 #include <QMainWindow>
 
-#include "user.hpp"
-#include "expenses.hpp"
-#include "statement.hpp"
-#include "department.hpp"
+#include "database.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,13 +25,14 @@ private:
     void load_users();
     void load_expenses();
     void save_users();
-    void getDepartments();
+    void open_mainwindow();
 
     Ui::MainWindow *ui;
-    std::vector<User> m_users;
+    DataBase db;
+
+    std::vector<User> *m_users;
     std::vector<Expenses> m_expenses;
-    std::vector<Statement> m_statement;
-    std::vector<Department> m_departments;
+    std::vector<Department> *m_departments;
     User m_auth_user;
 };
 #endif // MAINWINDOW_HPP

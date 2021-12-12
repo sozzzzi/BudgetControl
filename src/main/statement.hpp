@@ -28,4 +28,16 @@ private:
     size_t m_cost;
 };
 
+inline QDataStream &operator<<(QDataStream &ost, const Statement &s)
+{
+    s.save(ost);
+    return ost;
+}
+
+inline QDataStream &operator>>(QDataStream &ist, Statement &s)
+{
+    s.load(ist);
+    return ist;
+}
+
 #endif // STATEMENT_HPP

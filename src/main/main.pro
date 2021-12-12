@@ -4,6 +4,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
     accountantmainwindow.cpp \
+    apply.cpp \
+    database.cpp \
     department.cpp \
     edit_expanses.cpp \
     edit_expense.cpp \
@@ -16,6 +18,8 @@ SOURCES += \
 
 HEADERS += \
     accountantmainwindow.hpp \
+    apply.hpp \
+    database.hpp \
     department.hpp \
     edit_expanses.hpp \
     edit_expense.hpp \
@@ -27,6 +31,7 @@ HEADERS += \
 
 FORMS += \
     accountantmainwindow.ui \
+    apply.ui \
     authForm.ui \
     edit_expanses.ui \
     edit_expense.ui \

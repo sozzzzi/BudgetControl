@@ -25,6 +25,11 @@ void Department::addExpense(Expenses m_expenses_)
     m_expenses.push_back(m_expenses_);
 }
 
+void Department::addStatement(Statement m_statement_)
+{
+    m_statements.push_back(m_statement_);
+}
+
 std::vector<Expenses>* Department::getExpenses()
 {
     return &m_expenses;

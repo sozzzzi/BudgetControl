@@ -1,7 +1,7 @@
 #ifndef EMPLOYEEMAINWINDOW_HPP
 #define EMPLOYEEMAINWINDOW_HPP
 
-#include "department.hpp"
+#include "database.hpp"
 
 #include <QMainWindow>
 
@@ -16,13 +16,18 @@ class EmployeeMainWindow : public QMainWindow
 public:
     explicit EmployeeMainWindow(QWidget *parent = nullptr);
     ~EmployeeMainWindow();
-    void setDepartment(Department);
+    void setDepartment(QString);
     void setUser(User);
+    void setDataBase(DataBase&);
+
+public slots:
+    void apply();
 
 private:
     Ui::EmployeeMainWindow *ui;
-    Department m_department;
+    Department *m_department;
     User m_user;
+    DataBase db;
 };
 
 #endif // EMPLOYEEMAINWINDOW_HPP

@@ -1,6 +1,6 @@
 #ifndef ACCOUNTANTMAINWINDOW_HPP
 #define ACCOUNTANTMAINWINDOW_HPP
-#include "edit_expanses.hpp"
+#include "database.hpp"
 
 #include <QMainWindow>
 
@@ -15,20 +15,20 @@ class AccountantMainWindow : public QMainWindow
 public:
     explicit AccountantMainWindow(QWidget *parent = nullptr);
     ~AccountantMainWindow();
-    void setDepartment(std::vector<Department>);
     void setUser(User);
+    void setDataBase(DataBase&);
 
 public slots:
     void openEditExpenses();
 
-    void save_departments();
-    void save_users();
-    void save_expenses();
-
 private:
     Ui::AccountantMainWindow *ui;
 
-    std::vector<Department> m_departments;
+    DataBase db;
+    std::vector<User> *m_users;
+    std::vector<Expenses> *m_expenses;
+    std::vector<Statement> *m_statement;
+    std::vector<Department> *m_departments;
     User m_user;
 };
 

@@ -1,5 +1,6 @@
 #include <QFile>
 
+#include "edit_expanses.hpp"
 #include "accountantmainwindow.hpp"
 #include "ui_accountantmainwindow.h"
 
@@ -15,53 +16,12 @@ AccountantMainWindow::~AccountantMainWindow()
     delete ui;
 }
 
-void AccountantMainWindow::save_departments()
+void AccountantMainWindow::setDataBase(DataBase& db_)
 {
-    save_users();
-    save_expenses();
-}
+    db = db_;
 
-void AccountantMainWindow::save_users()
-{
-    QFile outf("users.bin");
-    outf.open(QIODevice::WriteOnly);
-    QDataStream ost(&outf);
-    for (size_t i = 0; i < m_departments.size(); i++)
-    {
-        std::vector<User> m_users = m_departments[i].getUsers();
-
-        for (size_t j = 0; j < m_users.size(); j++)
-        {
-            if (m_users[j].getDepartment() != "Администрация")
-                ost << m_users[j];
-        }
-
-    }
-    outf.close();
-}
-
-void AccountantMainWindow::save_expenses()
-{
-    QFile outf("expenses.bin");
-    outf.open(QIODevice::WriteOnly);
-    QDataStream ost(&outf);
-    for (size_t i = 0; i < m_departments.size(); i++)
-    {
-        std::vector<Expenses> m_expenses = m_departments[i].getExpense();
-
-        for (size_t j = 0; j < m_expenses.size(); j++)
-        {
-            if (m_expenses.at(j).getDepartment() != "Администрация")
-                ost << m_expenses[j];
-        }
-
-    }
-    outf.close();
-}
-
-void AccountantMainWindow::setDepartment(std::vector<Department> m_departments_)
-{
-    m_departments = m_departments_;
+    m_users = db.getUsers();
+    m_departments = db.getDepartments();
 }
 
 void AccountantMainWindow::setUser(User m_user_)
@@ -75,7 +35,7 @@ void AccountantMainWindow::setUser(User m_user_)
 void AccountantMainWindow::openEditExpenses()
 {
     Edit_Expanses ee;
-    ee.setDepartment(&m_departments);
+    ee.setDepartment(m_departments);
     ee.exec();
-    save_departments();
+    db.save_expanses();
 }
