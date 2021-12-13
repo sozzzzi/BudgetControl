@@ -56,7 +56,7 @@ void Apply::accept()
     }
     m_expenses->at(index-1).setRemainder(m_remainder - cost);
     m_statement->setCost(cost);
-    m_statement->setExpenses(ui->comboBox->currentData().toString());
+    m_statement->setExpenses(m_expenses->at(index-1).getName());
 
     return QDialog::accept();
 }

@@ -2,6 +2,7 @@
 
 #include "edit_expanses.hpp"
 #include "accountantmainwindow.hpp"
+#include "table_statements.hpp"
 #include "ui_accountantmainwindow.h"
 
 AccountantMainWindow::AccountantMainWindow(QWidget *parent) :
@@ -38,4 +39,12 @@ void AccountantMainWindow::openEditExpenses()
     ee.setDepartment(m_departments);
     ee.exec();
     db.save_expanses();
+}
+
+void AccountantMainWindow::openTableStatements()
+{
+    table_statements ts;
+    ts.setStatements(*db.getStatements());
+    ts.setDepartments(*db.getDepartments());
+    ts.exec();
 }

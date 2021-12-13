@@ -20,6 +20,7 @@ void Edit_Expanses::addColumns()
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->horizontalHeader()->setStretchLastSection(true);
     ui->tableView->setModel(itemModel);
 }
 

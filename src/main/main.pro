@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     statement.cpp \
+    table_statements.cpp \
     user.cpp \
 
 HEADERS += \
@@ -27,6 +28,7 @@ HEADERS += \
     expenses.hpp \
     mainwindow.hpp \
     statement.hpp \
+    table_statements.hpp \
     user.hpp \
 
 FORMS += \
@@ -37,6 +39,7 @@ FORMS += \
     edit_expense.ui \
     employeemainwindow.ui \
     mainwindow.ui \
+    table_statements.ui
 
 
 CONFIG += c++11

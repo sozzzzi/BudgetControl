@@ -43,6 +43,6 @@ void EmployeeMainWindow::apply()
     st.setDepartment(m_department->getName());
     st.setEmployee(m_user.getSurname() + " " + m_user.getName() + " " + m_user.getPatronymic());
     m_department->addStatement(st);
-    db.save_statements();
+    db.add_statement(st);
     db.save_expanses();
 }

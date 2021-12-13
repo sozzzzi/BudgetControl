@@ -26,38 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     admin.setPassword("халаманов_папочка");
     m_users->push_back(admin);
 
-//    User user1;
-//    user1.setSurname("Абобов");
-//    user1.setName("Абоба");
-//    user1.setPatronymic("Абобович");
-//    user1.setDepartment("Бухгалтерия");
-//    user1.setPassword("я лучший тупа");
-//    m_users->push_back(user1);
-
-//    User user2;
-//    user2.setSurname("Биба");
-//    user2.setName("Бибович");
-//    user2.setPatronymic("Бибов");
-//    user2.setDepartment("Преподаватели");
-//    user2.setPassword("я бибка ы");
-//    m_users->push_back(user2);
-
-//    User user3;
-//    user3.setSurname("Лупов");
-//    user3.setName("Лупа");
-//    user3.setPatronymic("Лупович");
-//    user3.setDepartment("Охрана");
-//    user3.setPassword("за мной пупа");
-//    m_users->push_back(user3);
-
-//    User user4;
-//    user4.setSurname("Пупов");
-//    user4.setName("Пупа");
-//    user4.setPatronymic("Пупович");
-//    user4.setDepartment("Охрана");
-//    user4.setPassword("я иду после лупы");
-//    m_users->push_back(user4);
-
     authorization();
 
     auto updateTimer = new QTimer;

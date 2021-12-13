@@ -12,16 +12,18 @@ public:
     void save();
     std::vector<User> *getUsers();
     std::vector<Department> *getDepartments();
+    std::vector<Statement> *getStatements();
     Department *getDepartment(QString);
     void save_users();
     void save_expanses();
     void save_statements();
+    void add_statement(Statement);
 
 private:
 
     void load_users();
     void load_expenses();
-    //void load_statements();
+    void load_statements();
     void load_departments();
 
     std::vector<User> m_users;

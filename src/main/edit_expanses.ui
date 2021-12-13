@@ -59,7 +59,10 @@
     <item row="0" column="1">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>Отдел</string>
+       <string>Отдел:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>

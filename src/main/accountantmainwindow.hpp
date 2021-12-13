@@ -20,6 +20,7 @@ public:
 
 public slots:
     void openEditExpenses();
+    void openTableStatements();
 
 private:
     Ui::AccountantMainWindow *ui;

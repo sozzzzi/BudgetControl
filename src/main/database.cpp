@@ -9,7 +9,8 @@ DataBase::DataBase()
 void DataBase::save()
 {
     save_users();
-
+    save_expanses();
+    save_statements();
 }
 
 std::vector<Department> *DataBase::getDepartments()
@@ -80,13 +81,38 @@ void DataBase::save_statements()
     outf.close();
 }
 
+void DataBase::load_statements()
+{
+    QFile inf("statements.bin");
+    inf.open(QIODevice::ReadOnly);
+    QDataStream ist(&inf);
+    m_statements.clear();
+    while (!ist.atEnd())
+    {
+        Statement st;
+        ist >> st;
+        m_statements.push_back(st);
+    }
+}
+
+void DataBase::add_statement(Statement m_statement_)
+{
+    QFile outf("statements.bin");
+    outf.open(QIODevice::Append);
+    QDataStream out(&outf);
+    out << m_statement_;
+}
+
+std::vector<Statement> *DataBase::getStatements()
+{
+    return &m_statements;
+}
 
 void DataBase::load()
 {
     load_users();
     load_expenses();
-    //load_statements();
-
+    load_statements();
 }
 
 void DataBase::load_departments()
@@ -139,6 +165,41 @@ void DataBase::load_users()
         ist >> u;
         m_users.push_back(u);
     }
+
+    //для тестов +4 пользователя
+
+//    User user1;
+//    user1.setSurname("Абобов");
+//    user1.setName("Абоба");
+//    user1.setPatronymic("Абобович");
+//    user1.setDepartment("Бухгалтерия");
+//    user1.setPassword("я лучший тупа");
+//    m_users.push_back(user1);
+
+//    User user2;
+//    user2.setSurname("Биба");
+//    user2.setName("Бибович");
+//    user2.setPatronymic("Бибов");
+//    user2.setDepartment("Преподаватели");
+//    user2.setPassword("я бибка ы");
+//    m_users.push_back(user2);
+
+//    User user3;
+//    user3.setSurname("Лупов");
+//    user3.setName("Лупа");
+//    user3.setPatronymic("Лупович");
+//    user3.setDepartment("Охрана");
+//    user3.setPassword("за мной пупа");
+//    m_users.push_back(user3);
+
+//    User user4;
+//    user4.setSurname("Пупов");
+//    user4.setName("Пупа");
+//    user4.setPatronymic("Пупович");
+//    user4.setDepartment("Охрана");
+//    user4.setPassword("я иду после лупы");
+//    m_users.push_back(user4);
+
 }
 
 void DataBase::load_expenses()
