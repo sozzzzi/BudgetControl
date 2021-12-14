@@ -6,6 +6,7 @@
 #include "mainwindow.hpp"
 #include "employeemainwindow.hpp"
 #include "accountantmainwindow.hpp"
+#include "adminmainwindow.hpp"
 #include "database.hpp"
 #include "ui_mainwindow.h"
 #include "ui_authForm.h"
@@ -71,7 +72,14 @@ void MainWindow::open_mainwindow()
     QMessageBox::information(0, "BudgetControl", QString("Вы успешно авторизированы, %1 %2 %3.")
                              .arg(m_auth_user.getSurname()).arg(m_auth_user.getName()).arg(m_auth_user.getPatronymic()));
     m_departments = db.getDepartments();
-    if (m_auth_user.getDepartment() == "Администрация" || m_auth_user.getDepartment() == "Бухгалтерия")
+    if (m_auth_user.getDepartment() == "Администрация")
+    {
+        AdminMainWindow *admMW = new AdminMainWindow;
+        admMW->setDataBase(db);
+        admMW->setUser(m_auth_user);
+        admMW->show();
+    }
+    else if (m_auth_user.getDepartment() == "Бухгалтерия")
     {
         AccountantMainWindow *accMW = new AccountantMainWindow;
         accMW->setDataBase(db);

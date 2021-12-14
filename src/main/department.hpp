@@ -15,7 +15,7 @@ public:
     void addStatement(Statement);
     std::vector<Expenses>* getExpenses();
     std::vector<Expenses> getExpense();
-    std::vector<User> getUsers();
+    std::vector<User> &getUsers();
     Expenses searchExpense(QString);
 
 private:

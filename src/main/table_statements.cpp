@@ -1,15 +1,15 @@
 #include "table_statements.hpp"
 #include "ui_table_statements.h"
 
-table_statements::table_statements(QWidget *parent) :
+Table_Statements::Table_Statements(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::table_statements)
+    ui(new Ui::Table_Statements)
 {
     ui->setupUi(this);
     addColumns();
 }
 
-void table_statements::addColumns()
+void Table_Statements::addColumns()
 {
     itemModel = new QStandardItemModel(this);
     itemModel->setColumnCount(5);
@@ -17,10 +17,11 @@ void table_statements::addColumns()
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->horizontalHeader()->setStretchLastSection(true);
     ui->tableView->setModel(itemModel);
 }
 
-void table_statements::updateTable(int index)
+void Table_Statements::updateTable(int index)
 {
     addColumns();
     QString department = m_departments[index-1].getName();
@@ -40,12 +41,12 @@ void table_statements::updateTable(int index)
     }
 }
 
-void table_statements::setStatements(std::vector<Statement>& m_statements_)
+void Table_Statements::setStatements(std::vector<Statement>& m_statements_)
 {
     m_statements = m_statements_;
 }
 
-void table_statements::setDepartments(std::vector<Department>& m_departments_)
+void Table_Statements::setDepartments(std::vector<Department>& m_departments_)
 {
     m_departments = m_departments_;
 
@@ -55,7 +56,7 @@ void table_statements::setDepartments(std::vector<Department>& m_departments_)
     }
 }
 
-table_statements::~table_statements()
+Table_Statements::~Table_Statements()
 {
     delete ui;
 }

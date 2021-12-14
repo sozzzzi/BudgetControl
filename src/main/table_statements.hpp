@@ -7,16 +7,16 @@
 #include "department.hpp"
 
 namespace Ui {
-class table_statements;
+class Table_Statements;
 }
 
-class table_statements : public QDialog
+class Table_Statements : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit table_statements(QWidget *parent = nullptr);
-    ~table_statements();
+    explicit Table_Statements(QWidget *parent = nullptr);
+    ~Table_Statements();
     void setStatements(std::vector<Statement>&);
     void setDepartments(std::vector<Department>&);
     void addColumns();
@@ -24,7 +24,7 @@ public slots:
     void updateTable(int);
 
 private:
-    Ui::table_statements *ui;
+    Ui::Table_Statements *ui;
     QStandardItemModel *itemModel;
     std::vector<Statement> m_statements;
     std::vector<Department> m_departments;

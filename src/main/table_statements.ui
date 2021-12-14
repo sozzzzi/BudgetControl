@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>table_statements</class>
- <widget class="QDialog" name="table_statements">
+ <class>Table_Statements</class>
+ <widget class="QDialog" name="Table_Statements">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -53,7 +53,7 @@
   <connection>
    <sender>comboBox</sender>
    <signal>activated(int)</signal>
-   <receiver>table_statements</receiver>
+   <receiver>Table_Statements</receiver>
    <slot>updateTable(int)</slot>
    <hints>
     <hint type="sourcelabel">

@@ -21,7 +21,6 @@ void AccountantMainWindow::setDataBase(DataBase& db_)
 {
     db = db_;
 
-    m_users = db.getUsers();
     m_departments = db.getDepartments();
 }
 
@@ -43,7 +42,7 @@ void AccountantMainWindow::openEditExpenses()
 
 void AccountantMainWindow::openTableStatements()
 {
-    table_statements ts;
+    Table_Statements ts;
     ts.setStatements(*db.getStatements());
     ts.setDepartments(*db.getDepartments());
     ts.exec();

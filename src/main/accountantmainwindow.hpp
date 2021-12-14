@@ -26,7 +26,6 @@ private:
     Ui::AccountantMainWindow *ui;
 
     DataBase db;
-    std::vector<User> *m_users;
     std::vector<Expenses> *m_expenses;
     std::vector<Statement> *m_statement;
     std::vector<Department> *m_departments;

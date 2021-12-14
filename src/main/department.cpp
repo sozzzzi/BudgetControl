@@ -40,7 +40,7 @@ std::vector<Expenses> Department::getExpense()
     return m_expenses;
 }
 
-std::vector<User> Department::getUsers()
+std::vector<User> &Department::getUsers()
 {
     return m_users;
 }
