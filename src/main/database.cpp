@@ -3,7 +3,7 @@
 
 DataBase::DataBase()
 {
-
+    m_department_accountant.setName("Бухгалтерия");
 }
 
 void DataBase::save()
@@ -69,6 +69,11 @@ Department *DataBase::getDepartment(QString m_name_department)
     return &m_departments[0];
 }
 
+Department *DataBase::getAccountant()
+{
+    return &m_department_accountant;
+}
+
 void DataBase::save_statements()
 {
     QFile outf("statements.bin");
@@ -119,7 +124,11 @@ void DataBase::load_departments()
 {
     for (size_t i = 0; i < m_users.size(); i++)
     {
-        if (m_users[i].getDepartment() != "Администрация" && m_users[i].getDepartment() != "Бухгалтерия")
+        if (m_users[i].getDepartment() == "Бухгалтерия")
+        {
+            m_department_accountant.addUser(m_users[i]);
+        }
+        else if (m_users[i].getDepartment() != "Администрация")
         {
             bool find = false;
             for (size_t j = 0; j < m_departments.size(); j++)

@@ -14,13 +14,13 @@ public:
     std::vector<Department> *getDepartments();
     std::vector<Statement> *getStatements();
     Department *getDepartment(QString);
+    Department *getAccountant();
     void save_users();
     void save_expanses();
     void save_statements();
     void add_statement(Statement);
 
 private:
-
     void load_users();
     void load_expenses();
     void load_statements();
@@ -30,6 +30,7 @@ private:
     std::vector<Expenses> m_expenses;
     std::vector<Statement> m_statements;
     std::vector<Department> m_departments;
+    Department m_department_accountant;
 };
 
 #endif // DATABASE_H

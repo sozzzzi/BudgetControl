@@ -22,6 +22,13 @@ void Edit_Departments::setDepartments(std::vector<Department>* m_departments_)
     changeDepartment();
 }
 
+void Edit_Departments::setAccountant(Department* m_department_)
+{
+    m_departments->push_back(*m_department_);
+
+    changeDepartment();
+}
+
 void Edit_Departments::changeDepartment()
 {
     size_t size = ui->comboBox->count();

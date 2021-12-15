@@ -32,6 +32,7 @@ void AdminMainWindow::openEditDepartments()
 {
     Edit_Departments ed;
     ed.setDepartments(m_departments);
+    ed.setAccountant(db.getAccountant());
     ed.exec();
     db.save_users();
 }

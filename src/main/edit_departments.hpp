@@ -16,6 +16,7 @@ public:
     explicit Edit_Departments(QWidget *parent = nullptr);
     ~Edit_Departments();
     void setDepartments(std::vector<Department>*);
+    void setAccountant(Department*);
 
 public slots:
     void changeDepartments(int);
