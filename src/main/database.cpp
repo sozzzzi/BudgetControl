@@ -1,4 +1,6 @@
 ﻿#include <QFile>
+#include <QFileDialog>
+#include <QSaveFile>
 #include "database.hpp"
 
 DataBase::DataBase()
@@ -34,7 +36,6 @@ void DataBase::save_users()
             if (m_users[j].getDepartment() != "Администрация")
                 ost << m_users[j];
         }
-
     }
     outf.close();
 }
@@ -122,6 +123,7 @@ void DataBase::load()
 
 void DataBase::load_departments()
 {
+    m_departments.clear();
     for (size_t i = 0; i < m_users.size(); i++)
     {
         if (m_users[i].getDepartment() == "Бухгалтерия")
@@ -229,3 +231,168 @@ std::vector<User> *DataBase::getUsers()
 {
     return &m_users;
 }
+
+void DataBase::save_users_csv()
+{
+    QString fileName = QFileDialog::getSaveFileName(0, QString("Save Users As"), QString("Users-%1").arg(QDate::currentDate().toString()), "*.csv");
+    QSaveFile outf(fileName);
+    outf.open(QIODevice::WriteOnly);
+    QTextStream ost(&outf);
+    ost << QString("Фамилия;Имя;Отчество;Отдел;Пароль\n").toUtf8();
+    for (size_t i = 0; i < m_users.size(); i++)
+    {
+        QString line;
+        if (m_users[i].getDepartment() == "Администрация")
+            continue;
+        line = line + m_users[i].getSurname() + ";";
+        line = line + m_users[i].getName() + ";";
+        line = line + m_users[i].getPatronymic() + ";";
+        line = line + m_users[i].getDepartment() + ";";
+        line = line + m_users[i].getPassword() + ";\n";
+        line = line.toUtf8();
+        ost << line;
+    }
+    outf.commit();
+}
+
+void DataBase::save_expenses_csv()
+{
+    QString fileName = QFileDialog::getSaveFileName(0, QString("Save Expenses As"), QString("Expenses-%1").arg(QDate::currentDate().toString()), "*.csv");
+    QSaveFile outf(fileName);
+    outf.open(QIODevice::WriteOnly);
+    QTextStream ost(&outf);
+    ost << QString("Название;Описание;Отдел;Остаток;Лимит\n").toUtf8();
+    for (size_t i = 0; i < m_expenses.size(); i++)
+    {
+        QString line;
+        line = line + m_expenses[i].getName() + ";";
+        line = line + m_expenses[i].getDescription() + ";";
+        line = line + m_expenses[i].getDepartment() + ";";
+        line = line + QString("%1").arg(m_expenses[i].getRemainder()) + ";";
+        line = line + QString("%1").arg(m_expenses[i].getLimit()) + ";\n";
+        line = line.toUtf8();
+        ost << line;
+    }
+    outf.commit();
+}
+
+void DataBase::save_statements_csv()
+{
+    QString fileName = QFileDialog::getSaveFileName(0, QString("Save Statements As"), QString("Expenses-%1").arg(QDate::currentDate().toString()), "*.csv");
+    QSaveFile outf(fileName);
+    outf.open(QIODevice::WriteOnly);
+    QTextStream ost(&outf);
+    ost << QString("Работник;Отдел;Расход;Дата;Цена\n").toUtf8();
+    for (size_t i = 0; i < m_statements.size(); i++)
+    {
+        QString line;
+        line = line + m_statements[i].getEmployee() + ";";
+        line = line + m_statements[i].getDepartment() + ";";
+        line = line + m_statements[i].getExpenses() + ";";
+        line = line + m_statements[i].getDate().toString("dd MMM yyyy HH:mm:ss") + ";";
+        line = line + QString("%1").arg(m_statements[i].getCost()) + ";\n";
+        line = line.toUtf8();
+        ost << line;
+    }
+    outf.commit();
+}
+
+void DataBase::load_users_csv()
+{
+    QString fileName = QFileDialog::getOpenFileName(0, "Open Users", "", "*.csv");
+    QFile file(fileName);
+    file.open(QFile::ReadOnly | QFile::Text);
+    QTextStream in(&file); bool first_str = true;
+    m_users.clear();
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        if (first_str)
+        {
+            first_str = false;
+        }
+        else
+        {
+            User m_user;
+            QStringList list;
+            for (QString item : line.split(";"))
+            {
+                list.push_back(item);
+            }
+            m_user.setSurname(list[0]);
+            m_user.setName(list[1]);
+            m_user.setPatronymic(list[2]);
+            m_user.setDepartment(list[3]);
+            m_user.setPassword(list[4]);
+            m_users.push_back(m_user);
+        }
+    }
+    file.close();
+}
+
+void DataBase::load_expenses_csv()
+{
+    QString fileName = QFileDialog::getOpenFileName(0, "Open Expenses", "", "*.csv");
+    QFile file(fileName);
+    file.open(QFile::ReadOnly | QFile::Text);
+    QTextStream in(&file); bool first_str = true;
+    m_users.clear();
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        if (first_str)
+        {
+            first_str = false;
+        }
+        else
+        {
+            Expenses m_expense;
+            QStringList list;
+            for (QString item : line.split(";"))
+            {
+                list.push_back(item);
+            }
+            m_expense.setName(list[0]);
+            m_expense.setDescription(list[1]);
+            m_expense.setDepartment(list[2]);
+            m_expense.setRemainder(list[3].toULong());
+            m_expense.setLimit(list[4].toULong());
+            m_expenses.push_back(m_expense);
+        }
+    }
+    file.close();
+}
+
+void DataBase::load_statements_csv()
+{
+    QString fileName = QFileDialog::getOpenFileName(0, "Open Statements", "", "*.csv");
+    QFile file(fileName);
+    file.open(QFile::ReadOnly | QFile::Text);
+    QTextStream in(&file); bool first_str = true;
+    m_users.clear();
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        if (first_str)
+        {
+            first_str = false;
+        }
+        else
+        {
+            Statement m_statement;
+            QStringList list;
+            for (QString item : line.split(";"))
+            {
+                list.push_back(item);
+            }
+            m_statement.setEmployee(list[0]);
+            m_statement.setDepartment(list[1]);
+            m_statement.setExpenses(list[2]);
+            m_statement.setDate(QDate::fromString(list[3], "dd MMM yyyy HH:mm:ss"));
+            m_statement.setCost(list[4].toULong());
+            m_statements.push_back(m_statement);
+        }
+    }
+    file.close();
+}
+

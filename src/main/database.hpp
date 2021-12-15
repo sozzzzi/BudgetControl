@@ -20,6 +20,13 @@ public:
     void save_statements();
     void add_statement(Statement);
 
+    void save_users_csv();
+    void save_expenses_csv();
+    void save_statements_csv();
+    void load_users_csv();
+    void load_expenses_csv();
+    void load_statements_csv();
+
 private:
     void load_users();
     void load_expenses();

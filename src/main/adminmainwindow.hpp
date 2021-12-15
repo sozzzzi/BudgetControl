@@ -21,6 +21,13 @@ public:
 public slots:
     void openEditDepartments();
 
+    void exportUsers();
+    void exportExpenses();
+    void exportStatements();
+    void importUsers();
+    void importExpenses();
+    void importStatements();
+
 private:
     Ui::AdminMainWindow *ui;
 

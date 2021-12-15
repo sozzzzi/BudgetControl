@@ -36,3 +36,34 @@ void AdminMainWindow::openEditDepartments()
     ed.exec();
     db.save_users();
 }
+
+void AdminMainWindow::exportUsers()
+{
+    db.save_users_csv();
+}
+
+void AdminMainWindow::exportExpenses()
+{
+    db.save_expenses_csv();
+}
+
+void AdminMainWindow::exportStatements()
+{
+    db.save_statements_csv();
+}
+
+void AdminMainWindow::importUsers()
+{
+    db.load_users_csv();
+}
+
+void AdminMainWindow::importExpenses()
+{
+    db.load_expenses_csv();
+}
+
+void AdminMainWindow::importStatements()
+{
+    db.load_statements_csv();
+}
+
