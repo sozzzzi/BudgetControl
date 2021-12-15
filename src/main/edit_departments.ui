@@ -132,8 +132,8 @@
    <slot>addUser()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>477</x>
-     <y>338</y>
+     <x>489</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -148,8 +148,8 @@
    <slot>editUser()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>507</x>
-     <y>338</y>
+     <x>519</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -164,12 +164,28 @@
    <slot>delUser()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>537</x>
-     <y>338</y>
+     <x>549</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
      <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editDepartmentButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Edit_Departments</receiver>
+   <slot>editDepartments()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>537</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>125</y>
     </hint>
    </hints>
   </connection>
@@ -179,5 +195,6 @@
   <slot>addUser()</slot>
   <slot>editUser()</slot>
   <slot>delUser()</slot>
+  <slot>editDepartments()</slot>
  </slots>
 </ui>

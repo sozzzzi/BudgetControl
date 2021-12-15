@@ -1,5 +1,6 @@
 #include "edit_departments.hpp"
 #include "edit_user.hpp"
+#include "edit_department.hpp"
 #include "ui_edit_departments.h"
 
 Edit_Departments::Edit_Departments(QWidget *parent) :
@@ -17,6 +18,17 @@ Edit_Departments::~Edit_Departments()
 void Edit_Departments::setDepartments(std::vector<Department>* m_departments_)
 {
     m_departments = m_departments_;
+
+    changeDepartment();
+}
+
+void Edit_Departments::changeDepartment()
+{
+    size_t size = ui->comboBox->count();
+    for (size_t i = 1; i < size; i++)
+    {
+        ui->comboBox->removeItem(1);
+    }
 
     for (size_t i = 0; i < m_departments->size(); i++)
     {
@@ -44,7 +56,7 @@ void Edit_Departments::changeDepartments(int index)
     QStringList list_users;
     for (size_t i = 0; i < m_users->size(); i++)
     {
-        list_users << m_users->at(i).getName();
+        list_users << QString("%1 %2 %3").arg(m_users->at(i).getSurname()).arg(m_users->at(i).getName()).arg(m_users->at(i).getPatronymic());
     }
     ui->listWidget->addItems(list_users);
 }
@@ -68,7 +80,6 @@ void Edit_Departments::editUser()
     int i = index.row();
 
     Edit_User eu;
-
     eu.setUser(&m_users->at(i));
     eu.setDepartments(m_departments);
     if (eu.exec() != Edit_User::Accepted)
@@ -86,4 +97,13 @@ void Edit_Departments::delUser()
 
     m_users->erase(m_users->begin() + ind);
     changeDepartments(ui->comboBox->currentIndex());
+}
+
+void Edit_Departments::editDepartments()
+{
+    Edit_Department ed;
+    ed.setDepartments(m_departments);
+    if (ed.exec() != Edit_Departments::Accepted)
+        return;
+    changeDepartment();
 }

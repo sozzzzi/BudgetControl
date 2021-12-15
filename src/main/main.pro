@@ -8,6 +8,7 @@ SOURCES += \
     apply.cpp \
     database.cpp \
     department.cpp \
+    edit_department.cpp \
     edit_departments.cpp \
     edit_expanses.cpp \
     edit_expense.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     apply.hpp \
     database.hpp \
     department.hpp \
+    edit_department.hpp \
     edit_departments.hpp \
     edit_expanses.hpp \
     edit_expense.hpp \
@@ -42,6 +44,7 @@ FORMS += \
     adminmainwindow.ui \
     apply.ui \
     authForm.ui \
+    edit_department.ui \
     edit_departments.ui \
     edit_expanses.ui \
     edit_expense.ui \

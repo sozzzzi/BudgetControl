@@ -22,8 +22,11 @@ public slots:
     void addUser();
     void editUser();
     void delUser();
+    void editDepartments();
 
 private:
+    void changeDepartment();
+
     Ui::Edit_Departments *ui;
     std::vector<Department> *m_departments;
     std::vector<User>* m_users;
