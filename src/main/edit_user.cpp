@@ -39,6 +39,7 @@ void Edit_User::setUser(User* m_user_)
         ui->nameEdit->setText(m_user->getName());
         ui->patrEdit->setText(m_user->getPatronymic());
         ui->passEdit->setText(m_user->getPassword());
+        ui->departBox->setCurrentText(m_user->getDepartment());
     }
 }
 

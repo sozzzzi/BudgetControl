@@ -124,7 +124,5 @@ void Edit_Departments::editDepartments()
 {
     Edit_Department ed;
     ed.setDepartments(m_departments);
-    if (ed.exec() != Edit_Departments::Accepted)
-        return;
     changeDepartment();
 }
