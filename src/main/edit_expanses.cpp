@@ -89,6 +89,7 @@ void Edit_Expanses::editExpense()
     if (!ui->tableView->selectionModel()->hasSelection())
     {
         QMessageBox::information(0, "BudgetControl", "Расход не выбран.");
+        return;
     }
 
     QModelIndexList selection = ui->tableView->selectionModel()->selectedRows();
@@ -108,6 +109,7 @@ void Edit_Expanses::deleteExpense()
     if (!ui->tableView->selectionModel()->hasSelection())
     {
         QMessageBox::information(0, "BudgetControl", "Расход не выбран.");
+        return;
     }
 
     QModelIndexList selection = ui->tableView->selectionModel()->selectedRows();

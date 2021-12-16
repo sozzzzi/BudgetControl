@@ -1,3 +1,5 @@
+#include <QMessageBox>
+
 #include "edit_departments.hpp"
 #include "edit_user.hpp"
 #include "edit_department.hpp"
@@ -82,6 +84,12 @@ void Edit_Departments::addUser()
 
 void Edit_Departments::editUser()
 {
+    if (!ui->listWidget->selectionModel()->hasSelection())
+    {
+        QMessageBox::warning(0, "BudgetControl", "Выберите редактируемый элемент.");
+        return;
+    }
+
     QModelIndexList selection = ui->listWidget->selectionModel()->selectedRows();
     QModelIndex index = selection.at(0);
     int i = index.row();
@@ -98,6 +106,12 @@ void Edit_Departments::editUser()
 
 void Edit_Departments::delUser()
 {
+    if (!ui->listWidget->selectionModel()->hasSelection())
+    {
+        QMessageBox::warning(0, "BudgetControl", "Выберите редактируемый элемент.");
+        return;
+    }
+
     QModelIndexList selection = ui->listWidget->selectionModel()->selectedRows();
     QModelIndex index = selection.at(0);
     size_t ind = index.row();
