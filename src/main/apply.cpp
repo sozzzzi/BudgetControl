@@ -39,7 +39,7 @@ void Apply::accept()
     size_t m_limit = m_expenses->at(index-1).getLimit();
     size_t m_remainder = m_expenses->at(index-1).getRemainder();
 
-    if (cost < 0)
+    if (cost <= 0)
     {
         QMessageBox::warning(0, "BudgerControl", "Цена заявки не может быть меньше или равна нулю.");
         return;
@@ -60,7 +60,6 @@ void Apply::accept()
 
     return QDialog::accept();
 }
-
 
 void Apply::on_comboBox_currentIndexChanged(int index)
 {

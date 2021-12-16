@@ -6,16 +6,19 @@ class User
 {
 public:
     User();
-    void setSurname(QString);
+    void setSurname(QString&);
     QString &getSurname();
-    void setName(QString);
+    void setName(QString&);
     QString &getName();
-    void setPatronymic(QString);
+    void setPatronymic(QString&);
     QString &getPatronymic();
-    void setDepartment(QString);
+    void setDepartment(QString&);
     QString &getDepartment();
-    void setPassword(QString);
+    void setPassword(QString&);
     QString &getPassword();
+
+    bool setData(QString &, QString &, QString &,
+                 QString&, QString &);
 
     void save(QDataStream &ost) const;
     void load(QDataStream &ist);

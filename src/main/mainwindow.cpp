@@ -20,11 +20,17 @@ MainWindow::MainWindow(QWidget *parent)
     m_users = db.getUsers();
 
     User admin;
-    admin.setSurname("Халаманов");
-    admin.setName("Алексей");
-    admin.setPatronymic("Павлович");
-    admin.setDepartment("Администрация");
-    admin.setPassword("халаманов_папочка");
+    QString surname = "Халаманов";
+    QString name = "Алексей";
+    QString patr = "Павлович";
+    QString depart = "Администрация";
+    QString password = "халаманов_папочка";
+
+    admin.setSurname(surname);
+    admin.setName(name);
+    admin.setPatronymic(patr);
+    admin.setDepartment(depart);
+    admin.setPassword(password);
     m_users->push_back(admin);
 
     authorization();

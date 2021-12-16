@@ -6,16 +6,17 @@ class Expenses
 {
 public:
     Expenses();
-    void setName(QString);
+    void setName(QString&);
     QString &getName();
-    void setDescription(QString);
+    void setDescription(QString&);
     QString &getDescription();
-    void setDepartment(QString);
+    void setDepartment(QString&);
     QString &getDepartment();
     void setLimit(size_t);
     size_t &getLimit();
     void setRemainder(size_t);
     size_t &getRemainder();
+    bool setData(QString&, QString&, QString&, size_t, size_t);
 
     void save(QDataStream &ost) const;
     void load(QDataStream &ist);

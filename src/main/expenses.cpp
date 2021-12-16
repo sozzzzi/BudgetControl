@@ -5,7 +5,7 @@ Expenses::Expenses()
 
 }
 
-void Expenses::setName(QString m_name_)
+void Expenses::setName(QString &m_name_)
 {
     m_name = m_name_;
 }
@@ -15,7 +15,7 @@ QString &Expenses::getName()
     return m_name;
 }
 
-void Expenses::setDescription(QString m_description_)
+void Expenses::setDescription(QString &m_description_)
 {
     m_description = m_description_;
 }
@@ -25,7 +25,7 @@ QString &Expenses::getDescription()
     return m_description;
 }
 
-void Expenses::setDepartment(QString m_department_)
+void Expenses::setDepartment(QString &m_department_)
 {
     m_department = m_department_;
 }
@@ -53,6 +53,24 @@ void Expenses::setRemainder(size_t m_remainder_)
 size_t &Expenses::getRemainder()
 {
     return m_remainder;
+}
+
+bool Expenses::setData(QString &m_name_, QString &m_description_, QString &m_department_,
+             size_t m_remainder_, size_t m_limit_)
+{
+    if (m_name_.size() == 0 || m_description_.size() == 0 || m_department_.size() == 0
+            || m_limit_ <= 0 || m_remainder_ <= 0)
+    {
+        return false;
+    }
+
+    m_name = m_name_;
+    m_description = m_description_;
+    m_department = m_department_;
+    m_limit = m_limit_;
+    m_remainder = m_remainder_;
+
+    return true;
 }
 
 void Expenses::save(QDataStream &ost) const
