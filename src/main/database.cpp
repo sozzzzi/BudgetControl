@@ -278,7 +278,7 @@ void DataBase::save_expenses_csv()
 
 void DataBase::save_statements_csv()
 {
-    QString fileName = QFileDialog::getSaveFileName(0, QString("Save Statements As"), QString("Expenses-%1").arg(QDate::currentDate().toString()), "*.csv");
+    QString fileName = QFileDialog::getSaveFileName(0, QString("Save Statements As"), QString("Statements-%1").arg(QDate::currentDate().toString()), "*.csv");
     QSaveFile outf(fileName);
     outf.open(QIODevice::WriteOnly);
     QTextStream ost(&outf);
@@ -289,7 +289,7 @@ void DataBase::save_statements_csv()
         line = line + m_statements[i].getEmployee() + ";";
         line = line + m_statements[i].getDepartment() + ";";
         line = line + m_statements[i].getExpenses() + ";";
-        line = line + m_statements[i].getDate().toString("dd MMM yyyy HH:mm:ss") + ";";
+        line = line + m_statements[i].getDate().toString("dd MMM yyyy") + ";";
         line = line + QString("%1").arg(m_statements[i].getCost()) + ";\n";
         line = line.toUtf8();
         ost << line;
@@ -388,7 +388,7 @@ void DataBase::load_statements_csv()
             m_statement.setEmployee(list[0]);
             m_statement.setDepartment(list[1]);
             m_statement.setExpenses(list[2]);
-            m_statement.setDate(QDate::fromString(list[3], "dd MMM yyyy HH:mm:ss"));
+            m_statement.setDate(QDate::fromString(list[3], "dd MMM yyyy"));
             m_statement.setCost(list[4].toULong());
             m_statements.push_back(m_statement);
         }
