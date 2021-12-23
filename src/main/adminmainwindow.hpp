@@ -25,8 +25,6 @@ public slots:
     void exportExpenses();
     void exportStatements();
     void importUsers();
-    void importExpenses();
-    void importStatements();
 
 private:
     Ui::AdminMainWindow *ui;

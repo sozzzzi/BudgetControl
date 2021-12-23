@@ -328,6 +328,7 @@ void DataBase::load_users_csv()
         }
     }
     file.close();
+    load_departments();
 }
 
 void DataBase::load_expenses_csv()

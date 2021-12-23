@@ -57,13 +57,3 @@ void AdminMainWindow::importUsers()
     db.load_users_csv();
 }
 
-void AdminMainWindow::importExpenses()
-{
-    db.load_expenses_csv();
-}
-
-void AdminMainWindow::importStatements()
-{
-    db.load_statements_csv();
-}
-

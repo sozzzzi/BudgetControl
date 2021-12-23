@@ -17,7 +17,7 @@ public:
     explicit EmployeeMainWindow(QWidget *parent = nullptr);
     ~EmployeeMainWindow();
     void setDepartment(QString);
-    void setUser(User);
+    void setUser(User&);
     void setDataBase(DataBase&);
 
 public slots:

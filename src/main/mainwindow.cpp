@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString name = "Алексей";
     QString patr = "Павлович";
     QString depart = "Администрация";
-    QString password = "халаманов_папочка";
+    QString password = "12345678";
 
     admin.setSurname(surname);
     admin.setName(name);

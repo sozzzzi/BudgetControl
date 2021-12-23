@@ -22,9 +22,10 @@ void EmployeeMainWindow::setDataBase(DataBase& db_)
 void EmployeeMainWindow::setDepartment(QString m_department_name)
 {
     m_department = db.getDepartment(m_department_name);
+    ui->departmentLabel->setText(m_department->getName());
 }
 
-void EmployeeMainWindow::setUser(User m_user_)
+void EmployeeMainWindow::setUser(User &m_user_)
 {
     m_user = m_user_;
 

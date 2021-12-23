@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>329</width>
-    <height>123</height>
+    <height>146</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>0</y>
       <width>311</width>
-      <height>81</height>
+      <height>97</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -93,7 +93,7 @@
      <x>0</x>
      <y>0</y>
      <width>329</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -105,8 +105,6 @@
       <string>Import</string>
      </property>
      <addaction name="actionUsers"/>
-     <addaction name="actionExpenses"/>
-     <addaction name="actionStatements"/>
     </widget>
     <widget class="QMenu" name="menuExport">
      <property name="title">
@@ -204,42 +202,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionExpenses</sender>
-   <signal>triggered()</signal>
-   <receiver>AdminMainWindow</receiver>
-   <slot>importExpenses()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>164</x>
-     <y>61</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionExpenses_2</sender>
    <signal>triggered()</signal>
    <receiver>AdminMainWindow</receiver>
    <slot>exportExpenses()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>164</x>
-     <y>61</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionStatements</sender>
-   <signal>triggered()</signal>
-   <receiver>AdminMainWindow</receiver>
-   <slot>importStatements()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

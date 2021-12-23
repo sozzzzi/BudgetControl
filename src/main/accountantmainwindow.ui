@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>306</width>
+    <width>391</width>
     <height>166</height>
    </rect>
   </property>
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>281</width>
-      <height>118</height>
+      <width>371</width>
+      <height>148</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -139,8 +139,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>306</width>
-     <height>20</height>
+     <width>391</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

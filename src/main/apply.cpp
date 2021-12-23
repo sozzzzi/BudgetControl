@@ -57,7 +57,7 @@ void Apply::accept()
     m_expenses->at(index-1).setRemainder(m_remainder - cost);
     m_statement->setCost(cost);
     m_statement->setExpenses(m_expenses->at(index-1).getName());
-
+    QMessageBox::information(0, "BudgetControl", "Заявление успешно поданно, денежные средства будут возвращены");
     return QDialog::accept();
 }
 
